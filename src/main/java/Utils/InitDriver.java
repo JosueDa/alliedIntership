@@ -13,6 +13,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Optional;
 
+import java.util.concurrent.TimeUnit;
+
 
 public class InitDriver {
 
@@ -69,6 +71,7 @@ public class InitDriver {
             }
 
             wait = new WebDriverWait(driver, 15,100);
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         } catch (Exception var5) {
             var5.printStackTrace();
             Assert.fail("fail to init the browser");

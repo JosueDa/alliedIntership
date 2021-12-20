@@ -7,6 +7,9 @@ import Utils.InitDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import java.io.File;
 
 public class CreateCampaignTest extends InitDriver {
 
@@ -15,7 +18,9 @@ public class CreateCampaignTest extends InitDriver {
     CreationCampaign creationCampaign;
     String pass="";
     String email="";
-    String OTP="";
+    String OTP="413579";
+    File image1 = new File("C:\\Users\\josue\\Documents\\Intership\\src\\test\\java\\files\\1.jpg");
+    File image2 = new File("C:\\Users\\josue\\Documents\\Intership\\src\\test\\java\\files\\2.jpg");
 
     @Test(priority = 1)
     public void Login() {
@@ -40,12 +45,81 @@ public class CreateCampaignTest extends InitDriver {
         home.clickHamburgerButton();
         home.clickCreateCampaignButton();
         creationCampaign=new CreationCampaign(driver,wait);
-        Assert.assertTrue(creationCampaign.titleExist());
-    }
+        Assert.assertTrue(creationCampaign.mainTitleExist());
+   }
 
     @Test(priority = 3, dependsOnMethods = "createCampaignScreen")
-    public void selectCampaignObjective () {
+    public void selectCampaignObjective() {
+        creationCampaign.clickCampaignObjectiveDropdown("Generación de clientes potenciales");
+        Assert.assertTrue(creationCampaign.titleExist("Ubicaciones en plataforma Facebook"));
+    }
 
+    @Test(priority = 4, dependsOnMethods = "selectCampaignObjective")
+    public void selectPlatformLocations() {
+        creationCampaign.clickNewsSectionFacebookOption();
+        Assert.assertTrue(creationCampaign.titleExist("Producto"));
+    }
+
+    @Test(priority = 5, dependsOnMethods = "selectPlatformLocations")
+    public void selectProductAndAssets() {
+        creationCampaign.clickSelectProductDropdown("Producto Generico");
+        creationCampaign.clickAdAccount("Aly-Ai");
+        creationCampaign.clickFanPageDropdown("Personal | Digital Derma");
+        //a form selection is missing
+        Assert.assertTrue(creationCampaign.titleExist("Nombre de Campaña (Opcional)"));
+    }
+
+    @Test(priority = 6, dependsOnMethods = "selectProductAndAssets")
+    public void fillDataInputs() {
+        SoftAssert soft= new SoftAssert();
+        soft.assertTrue(creationCampaign.enterOptionalNameInput("TestName"));
+        soft.assertTrue(creationCampaign.enterMainTextInput("Main test text minimum thirty characters "));
+        soft.assertTrue(creationCampaign.enterTitleInput("Title test"));
+        soft.assertTrue(creationCampaign.enterDescriptionInput("Test description"));
+        soft.assertAll();
+    }
+
+    @Test(priority = 7, dependsOnMethods = "fillDataInputs")
+    public void selectCallAction() {
+        creationCampaign.clickCallActionDropdown("Cotizar");
+        Assert.assertTrue(creationCampaign.titleExist("Programar duración de la campaña"));
+    }
+
+    @Test(priority =8, dependsOnMethods = "selectCallAction")
+    public void campaignDuration() {
+        Assert.assertEquals(creationCampaign.getDifferenceBetweenDates(),2);
+    }
+
+    @Test(priority =9, dependsOnMethods = "campaignDuration")
+    public void websiteLinkAndBudget() {
+        creationCampaign.enterLinkInput("www.aly-ai.com");
+        creationCampaign.enterBudgetInput("3");
+        Assert.assertTrue(creationCampaign.titleExist("Lugares"));
+    }
+
+    @Test(priority =10, dependsOnMethods = "websiteLinkAndBudget")
+    public void addPlaceValidation () {
+        creationCampaign.clickCountryOption();
+        creationCampaign.enterPlacesInput("Guatemala");
+        creationCampaign.clickSearchPlacesButton();
+        creationCampaign.clickPlacesDropdown("Guatemala");
+        creationCampaign.clickAddPlacesButton();
+        Assert.assertTrue(creationCampaign.titleExist("Guatemala"));
+    }
+
+    @Test(priority =11, dependsOnMethods = "addPlaceValidation")
+    public void segmentationFields () {
+        creationCampaign.clickBehaviourOption();
+        creationCampaign.clickSegmentationDropdown("Viajeros frecuentes");
+        creationCampaign.clickAddSegmentationButton();
+        Assert.assertTrue(creationCampaign.titleExist("Viajeros frecuentes"));
+    }
+
+    @Test(priority =12, dependsOnMethods = "addPlaceValidation")
+    public void ageAndUploadFiles () {
+        creationCampaign.enterAgeRange("20","40");
+        creationCampaign.uploadFile(image1.getAbsolutePath());
+        //creationCampaign.clickCampaignCreationButton();
     }
 
     @AfterClass()
