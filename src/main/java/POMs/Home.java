@@ -19,6 +19,9 @@ public class Home {
     @FindBy(xpath = "//header//button[contains(@class, 'MuiButtonBase-root')][2]")
     protected WebElement hamburgerButton;
 
+    @FindBy(xpath = "//header//button[contains(@class, 'MuiButtonBase-root')][3]")
+    protected WebElement photoButton;
+
     @FindBy(id = "createAdMenuItem")
     protected WebElement createCampaignButton;
 
@@ -48,6 +51,12 @@ public class Home {
         wait.until(ExpectedConditions.visibilityOf(hamburgerButton));
         wait.until(ExpectedConditions.elementToBeClickable(hamburgerButton));
         ((JavascriptExecutor)driver).executeScript("arguments[0].click()",hamburgerButton);
+    }
+
+    public void clickPhotoButton() {
+        wait.until(ExpectedConditions.visibilityOf(photoButton));
+        wait.until(ExpectedConditions.elementToBeClickable(photoButton));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click()",photoButton);
     }
 
     public void clickCreateCampaignButton() {

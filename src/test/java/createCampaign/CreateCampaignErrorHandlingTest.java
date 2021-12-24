@@ -58,56 +58,56 @@ public class CreateCampaignErrorHandlingTest extends InitDriver {
     public void missingProductErrorExist() {
         creationCampaign.clickCampaignCreationButton();
         Assert.assertEquals(creationCampaign.productErrorExist(),"Seleccione un Producto");
-        System.out.println(creationCampaign.productErrorExist());
+        System.out.println("Error obtenido al no ingresar un producto: "+creationCampaign.productErrorExist());
     }
 
     @Test(priority = 5, dependsOnMethods = "selectCampaignObjective")
     public void missingAdminAccountErrorExist() {
         Assert.assertEquals(creationCampaign.adminAccountErrorExist(),"Seleccione una Cuenta Administradora");
-        System.out.println(creationCampaign.adminAccountErrorExist());
+        System.out.println("Error obtenido al no ingresar una cuenta adinistradora: "+creationCampaign.adminAccountErrorExist());
     }
 
     @Test(priority = 6, dependsOnMethods = "selectCampaignObjective")
     public void minimumMainTextErrorExist() {
         Assert.assertEquals(creationCampaign.mainTextErrorExist(),"30 Caracteres Mínimo");
-        System.out.println(creationCampaign.mainTextErrorExist());
+        System.out.println("Error obtenido al no ingresar un Texto Principal: "+creationCampaign.mainTextErrorExist());
     }
 
     @Test(priority = 7, dependsOnMethods = "selectCampaignObjective")
     public void minimumTitleErrorExist() {
         Assert.assertEquals(creationCampaign.titleErrorExist(),"10 Caracteres Mínimo");
-        System.out.println(creationCampaign.titleErrorExist());
+        System.out.println("Error obtenido al no ingresar un título: "+creationCampaign.titleErrorExist());
     }
 
     @Test(priority = 8, dependsOnMethods = "selectCampaignObjective")
     public void missingCallActionErrorExist() {
         Assert.assertEquals(creationCampaign.callActionErrorExist(),"Seleccione una Llamada a la acción");
-        System.out.println(creationCampaign.callActionErrorExist());
+        System.out.println("Error obtenido al no ingresar una llamada de acción: "+creationCampaign.callActionErrorExist());
     }
 
     @Test(priority = 9, dependsOnMethods = "selectCampaignObjective")
     public void minimumURLErrorExist() {
         Assert.assertEquals(creationCampaign.URLErrorExist(),"Debe de ingresar una URL válida");
-        System.out.println(creationCampaign.URLErrorExist());
+        System.out.println("Error obtenido al no ingresar un URL: "+creationCampaign.URLErrorExist());
     }
 
     @Test(priority = 10, dependsOnMethods = "selectCampaignObjective")
     public void emptyBudgetErrorExist() {
         Assert.assertEquals(creationCampaign.budgetErrorExist(),"Debe de ingresar un valor numérico válido");
-        System.out.println(creationCampaign.budgetErrorExist());
+        System.out.println("Error obtenido al no ingresar un presupuesto: "+creationCampaign.budgetErrorExist());
     }
 
     @Test(priority = 11, dependsOnMethods = "selectCampaignObjective")
     public void minimumBudgetErrorExist() {
         creationCampaign.enterBudgetInput("1");
         Assert.assertEquals(creationCampaign.budgetErrorExist(),"Debe de ingresar un valor mayor a 3(el mínimo es 1 diario)");
-        System.out.println(creationCampaign.budgetErrorExist());
+        System.out.println("Error obtenido al no ingresar un presupuesto menor al necesario: "+creationCampaign.budgetErrorExist());
     }
 
     @Test(priority = 12, dependsOnMethods = "selectCampaignObjective")
     public void missingLocationErrorExist() {
         Assert.assertEquals(creationCampaign.locationErrorExist(),"Favor Ingrese una Locación");
-        System.out.println(creationCampaign.locationErrorExist());
+        System.out.println("Error obtenido al no ingresar una ubicación: "+creationCampaign.locationErrorExist());
     }
 
     @Test(priority =13, dependsOnMethods = "missingLocationErrorExist")

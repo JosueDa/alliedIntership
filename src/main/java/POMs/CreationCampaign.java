@@ -567,17 +567,14 @@ public class CreationCampaign {
         return false;
     }
 
-    public boolean uploadFile(String path){
-        for (int i=0;i<2;i++){
-            if (uploadFile.isDisplayed()){
-                ((JavascriptExecutor)driver).executeScript("arguments[0].setAttribute('value', '"+path+"')", uploadFile);
-                uploadFile.sendKeys(path);
-                return true;
-            }else {
-                ((JavascriptExecutor)driver).executeScript("window.scrollBy(0,400)");
-            }
+    public void uploadFile(String path){
+        if (!uploadFile.isDisplayed())((JavascriptExecutor)driver).executeScript("window.scrollBy(0,250)");
+        uploadFile.sendKeys(path);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        return false;
     }
 
     public boolean clickCampaignCreationButton(){

@@ -18,9 +18,10 @@ public class CreateCampaignBoundaryTest extends InitDriver {
     CreationCampaign creationCampaign;
     String pass="";
     String email="";
-    String OTP="942758";
-    File image1 = new File("C:\\Users\\josue\\Documents\\Intership\\src\\test\\java\\files\\1.jpg");
-    File image2 = new File("C:\\Users\\josue\\Documents\\Intership\\src\\test\\java\\files\\2.jpg");
+    String OTP="";
+    File image1 = new File("src/test/java/files/1.jpg");
+    File image2 = new File("src/test/java/files/2.jpg");
+    File image3 = new File("src/test/java/files/3.jpg");
 
     @Test(priority = 1)
     public void Login() {
@@ -180,12 +181,24 @@ public class CreateCampaignBoundaryTest extends InitDriver {
         Assert.assertTrue(creationCampaign.titleExist("Estudios universitarios en curso"));
     }
 
-    @Test(priority =14, dependsOnMethods = "addLocation")
-    public void ageAndUploadFiles (){
+    @Test(priority =14, dependsOnMethods = "segmentationFields")
+    public void ageAndGender(){
         creationCampaign.enterAgeRange("20","40");
         creationCampaign.clickFemaleGenderOption();
-        creationCampaign.uploadFile(image1.getAbsolutePath());
         //creationCampaign.clickCampaignCreationButton();
+    }
+
+    @Test(priority =15, dependsOnMethods = "ageAndGender")
+    public void uploadFiles(){
+        SoftAssert soft = new SoftAssert();
+        creationCampaign.uploadFile(image1.getAbsolutePath());
+        soft.assertTrue(creationCampaign.titleExist(image1.getName()));
+        creationCampaign.uploadFile(image2.getAbsolutePath());
+        soft.assertTrue(creationCampaign.titleExist(image2.getName()));
+        creationCampaign.uploadFile(image3.getAbsolutePath());
+        soft.assertTrue(creationCampaign.titleExist(image3.getName()));
+
+        soft.assertAll();
     }
 
     @AfterClass()

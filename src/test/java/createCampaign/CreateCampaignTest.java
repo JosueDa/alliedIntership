@@ -18,9 +18,8 @@ public class CreateCampaignTest extends InitDriver {
     CreationCampaign creationCampaign;
     String pass="";
     String email="";
-    String OTP="413579";
-    File image1 = new File("C:\\Users\\josue\\Documents\\Intership\\src\\test\\java\\files\\1.jpg");
-    File image2 = new File("C:\\Users\\josue\\Documents\\Intership\\src\\test\\java\\files\\2.jpg");
+    String OTP="";
+    File image1 = new File("src/test/java/files/1.jpg");
 
     @Test(priority = 1)
     public void Login() {
@@ -115,10 +114,11 @@ public class CreateCampaignTest extends InitDriver {
         Assert.assertTrue(creationCampaign.titleExist("Viajeros frecuentes"));
     }
 
-    @Test(priority =12, dependsOnMethods = "addPlaceValidation")
+    @Test(priority =12, dependsOnMethods = "segmentationFields")
     public void ageAndUploadFiles () {
         creationCampaign.enterAgeRange("20","40");
         creationCampaign.uploadFile(image1.getAbsolutePath());
+        Assert.assertTrue(creationCampaign.titleExist(image1.getName()));
         //creationCampaign.clickCampaignCreationButton();
     }
 
