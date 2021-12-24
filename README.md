@@ -1,15 +1,14 @@
-﻿# alliedIntership
 # Aly automated testing
 project using TestNG framework using java and selenium, for the automation of tests on Aly's website, which runs on Google Chrome.
 
 ## Requirements
 
-- It is recommended to have the latest JDK version installed on the computer
-- Make sure Java environment variables are set correctly
+- It is recommended to have the latest JDK version installed
+- Java environment variables setting correctly
 - Maven should be installed
-- Intellij can be used as the default IDE
+- Intellij recommended as a default IDE
 
-## Running the 
+## Running the tests
 
 If the IDE to be used is Intellij, a specific test class can be executed by pressing the "Ejecutar" button in the menu. We need to take in account that the corresponding values of credentials and OTP must be entered, before run the test. It is also possible to run the tests by means of the command
       "mvn -Dtest=NameClasstest"
