@@ -1,9 +1,7 @@
 package POMs;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -73,25 +71,23 @@ public class DownloadCSV {
         }
         return false;
     }
-    public void setEndDate(String month, String year, String day) {
+    public void setEndDate(String day) {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         wait.until(ExpectedConditions.visibilityOf(endDate));
         endDate.click();
-        for (int i=0; i>24 || !dateExist(month,year);i++){
-            nextDateButton.click();
-        }
+        nextDateButton.click();
+        nextDateButton.click();
         WebElement dayElement=driver.findElement(By.xpath("(//*[text()='"+day+"'])[1]"));
         wait.until(ExpectedConditions.visibilityOf(dayElement));
         ((JavascriptExecutor)driver).executeScript("arguments[0].click()",dayElement);
     }
 
-    public void setStartDate(String month, String year, String day) {
+    public void setStartDate(String day) {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         wait.until(ExpectedConditions.visibilityOf(startDate));
         startDate.click();
-        for (int i=0; i>24 || !dateExist(month,year);i++){
-            prevDateButton.click();
-        }
+        prevDateButton.click();
+        prevDateButton.click();
         WebElement dayElement=driver.findElement(By.xpath("(//*[text()='"+day+"'])[1]"));
         wait.until(ExpectedConditions.visibilityOf(dayElement));
         ((JavascriptExecutor)driver).executeScript("arguments[0].click()",dayElement);
@@ -108,6 +104,34 @@ public class DownloadCSV {
         this.companyInput.click();
         WebElement option = driver.findElement(By.xpath("//*[contains(text(),'"+optionString+"')]"));
         option.click();
+    }
+
+    public boolean allOptionExist(){
+        try {
+            driver.findElement(By.xpath("//*[text()='All/Todos']"));
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    public boolean clickCompanyDropdownByCoordinates() {
+        wait.until(ExpectedConditions.visibilityOf(companyInput));
+        Actions builder = new Actions(driver);
+        int count=0;
+        for (int i=0;i<=20;i++){
+            companyInput.click();
+            builder.sendKeys(Keys.TAB).build().perform();
+            if (allOptionExist()){
+                for (int j=0; j<count;j++){
+                    companyInput.click();
+                    builder.sendKeys(Keys.TAB).build().perform();
+                }
+                return true;
+            }
+            count++;
+        }
+        return false;
     }
 
     public void clickSendButton() {

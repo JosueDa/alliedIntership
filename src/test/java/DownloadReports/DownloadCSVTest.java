@@ -46,8 +46,8 @@ public class DownloadCSVTest extends InitDriver {
 
     @Test(priority = 2, dependsOnMethods = "Login")
     public void setDates() {
-        downloadCSV.setStartDate("septiembre","2021","5");
-        downloadCSV.setEndDate("febrero","2022","20");
+        downloadCSV.setStartDate("5");
+        downloadCSV.setEndDate("20");
     }
 
     @Test(priority = 3, dependsOnMethods = "Login")
@@ -58,7 +58,7 @@ public class DownloadCSVTest extends InitDriver {
         soft.assertTrue(downloadCSV.downloadCSVImagesButtonExist());
     }
 
-    @Test(priority = 3, dependsOnMethods = "selectCompany")
+    @Test(priority = 4, dependsOnMethods = "selectCompany")
     public void setNameAndDownload() {
         downloadCSV.enterFileNameInput("File TestName");
         downloadCSV.clickDownloadCSVImagesButton();
