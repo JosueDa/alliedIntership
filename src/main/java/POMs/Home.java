@@ -1,8 +1,10 @@
 package POMs;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,9 +15,6 @@ public class Home {
     @FindBy(className = "css-1wy0on6")
     protected WebElement dropdownButton;
 
-    @FindBy(xpath = "//*[contains(text(),'2020-11-28')]")
-    protected WebElement dropdownOptionButton;
-
     @FindBy(xpath = "//header//button[contains(@class, 'MuiButtonBase-root')][2]")
     protected WebElement hamburgerButton;
 
@@ -24,6 +23,9 @@ public class Home {
 
     @FindBy(id = "createAdMenuItem")
     protected WebElement createCampaignButton;
+
+    @FindBy(id = "billingPageId")
+    protected WebElement billingButton;
 
     @FindBy(xpath = "//*[contains(text(),'Negocio Administrador')]")
     protected WebElement titleText;
@@ -38,13 +40,10 @@ public class Home {
     }
 
     public void clickDropdownButton() {
+        Actions builder = new Actions(driver);
         wait.until(ExpectedConditions.visibilityOf(dropdownButton));
         this.dropdownButton.click();
-    }
-
-    public void clickDropdownOptionButton() {
-        wait.until(ExpectedConditions.visibilityOf(dropdownOptionButton));
-        this.dropdownOptionButton.click();
+        builder.sendKeys(Keys.TAB).build().perform();
     }
 
     public void clickHamburgerButton() {
@@ -63,6 +62,12 @@ public class Home {
         wait.until(ExpectedConditions.visibilityOf(createCampaignButton));
         wait.until(ExpectedConditions.elementToBeClickable(createCampaignButton));
         ((JavascriptExecutor)driver).executeScript("arguments[0].click()",createCampaignButton);
+    }
+
+    public void clickBillingButton() {
+        wait.until(ExpectedConditions.visibilityOf(billingButton));
+        wait.until(ExpectedConditions.elementToBeClickable(billingButton));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click()",billingButton);
     }
 
     public boolean titleExist(){

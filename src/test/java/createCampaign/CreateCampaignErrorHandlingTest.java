@@ -39,7 +39,6 @@ public class CreateCampaignErrorHandlingTest extends InitDriver {
     @Test(priority = 2, dependsOnMethods = "Login")
     public void createCampaignScreen() {
         home.clickDropdownButton();
-        home.clickDropdownOptionButton();
         home.clickHamburgerButton();
         home.clickCreateCampaignButton();
         creationCampaign=new CreationCampaign(driver,wait);
@@ -48,7 +47,7 @@ public class CreateCampaignErrorHandlingTest extends InitDriver {
 
     @Test(priority = 3, dependsOnMethods = "createCampaignScreen")
     public void selectCampaignObjective() {
-        creationCampaign.clickCampaignObjectiveDropdown("Generación de clientes potenciales");
+        creationCampaign.clickCampaignObjectiveDropdown();
         Assert.assertTrue(creationCampaign.titleExist("Ubicaciones en plataforma Facebook"));
         creationCampaign.clickNewsSectionFacebookOption();
         Assert.assertTrue(creationCampaign.titleExist("Producto"));

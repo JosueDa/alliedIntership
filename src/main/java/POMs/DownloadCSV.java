@@ -20,10 +20,10 @@ public class DownloadCSV {
     @FindBy(xpath = "//*[contains(text(),'Descarga de CSV')]")
     protected WebElement titleText;
 
-    @FindBy(xpath = "(//*[contains(@class, 'MuiSvgIcon-root')])[6]")
+    @FindBy(xpath = "(//*[contains(@class, 'MuiButtonBase-root MuiIconButton-root MuiPickersCalendarHeader-iconButton')])[2]")
     protected WebElement nextDateButton;
 
-    @FindBy(xpath = "(//*[contains(@class, 'MuiSvgIcon-root')])[5]")
+    @FindBy(xpath = "(//*[contains(@class, 'MuiButtonBase-root MuiIconButton-root MuiPickersCalendarHeader-iconButton')])[1]")
     protected WebElement prevDateButton;
 
     @FindBy(xpath = "(//*[contains(@class, 'css-1hwfws3')])[2]")
@@ -71,24 +71,24 @@ public class DownloadCSV {
         }
         return false;
     }
-    public void setEndDate(String day) {
+    public void setEndDate() {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         wait.until(ExpectedConditions.visibilityOf(endDate));
         endDate.click();
-        nextDateButton.click();
-        nextDateButton.click();
-        WebElement dayElement=driver.findElement(By.xpath("(//*[text()='"+day+"'])[1]"));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click()",nextDateButton);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click()",nextDateButton);
+        WebElement dayElement=driver.findElement(By.xpath("(//*[text()='5'])[1]"));
         wait.until(ExpectedConditions.visibilityOf(dayElement));
         ((JavascriptExecutor)driver).executeScript("arguments[0].click()",dayElement);
     }
 
-    public void setStartDate(String day) {
+    public void setStartDate() {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         wait.until(ExpectedConditions.visibilityOf(startDate));
         startDate.click();
-        prevDateButton.click();
-        prevDateButton.click();
-        WebElement dayElement=driver.findElement(By.xpath("(//*[text()='"+day+"'])[1]"));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click()",prevDateButton);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click()",prevDateButton);
+        WebElement dayElement=driver.findElement(By.xpath("(//*[text()='20'])[1]"));
         wait.until(ExpectedConditions.visibilityOf(dayElement));
         ((JavascriptExecutor)driver).executeScript("arguments[0].click()",dayElement);
     }

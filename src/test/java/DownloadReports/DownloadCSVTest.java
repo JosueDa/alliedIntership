@@ -37,7 +37,6 @@ public class DownloadCSVTest extends InitDriver {
     @Test(priority = 1, dependsOnMethods = "Login")
     public void downloadCSVScreen() {
         home.clickDropdownButton();
-        home.clickDropdownOptionButton();
         home.clickPhotoButton();
         home.clickCreateCampaignButton();
         downloadCSV= new DownloadCSV(driver,wait);
@@ -46,8 +45,8 @@ public class DownloadCSVTest extends InitDriver {
 
     @Test(priority = 2, dependsOnMethods = "Login")
     public void setDates() {
-        downloadCSV.setStartDate("5");
-        downloadCSV.setEndDate("20");
+        downloadCSV.setStartDate();
+        downloadCSV.setEndDate();
     }
 
     @Test(priority = 3, dependsOnMethods = "Login")

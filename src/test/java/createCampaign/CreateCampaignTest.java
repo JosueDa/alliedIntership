@@ -40,7 +40,6 @@ public class CreateCampaignTest extends InitDriver {
     @Test(priority = 2, dependsOnMethods = "Login")
     public void createCampaignScreen() {
         home.clickDropdownButton();
-        home.clickDropdownOptionButton();
         home.clickHamburgerButton();
         home.clickCreateCampaignButton();
         creationCampaign=new CreationCampaign(driver,wait);
@@ -49,7 +48,7 @@ public class CreateCampaignTest extends InitDriver {
 
     @Test(priority = 3, dependsOnMethods = "createCampaignScreen")
     public void selectCampaignObjective() {
-        creationCampaign.clickCampaignObjectiveDropdown("Generación de clientes potenciales");
+        creationCampaign.clickCampaignObjectiveDropdown();
         Assert.assertTrue(creationCampaign.titleExist("Ubicaciones en plataforma Facebook"));
     }
 
@@ -61,9 +60,9 @@ public class CreateCampaignTest extends InitDriver {
 
     @Test(priority = 5, dependsOnMethods = "selectPlatformLocations")
     public void selectProductAndAssets() {
-        creationCampaign.clickSelectProductDropdown("Producto Generico");
-        creationCampaign.clickAdAccount("Aly-Ai");
-        creationCampaign.clickFanPageDropdown("Personal | Digital Derma");
+        creationCampaign.clickSelectProductDropdown();
+        creationCampaign.clickAdAccount();
+        creationCampaign.clickFanPageDropdown();
         //a form selection is missing
         Assert.assertTrue(creationCampaign.titleExist("Nombre de Campaña (Opcional)"));
     }

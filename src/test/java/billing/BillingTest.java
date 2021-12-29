@@ -1,5 +1,6 @@
-package DownloadReports;
+package billing;
 
+import POMs.Billing;
 import POMs.DownloadCSV;
 import POMs.Home;
 import POMs.Login;
@@ -9,14 +10,17 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class DownloadBoundaryCSVTest extends InitDriver {
+public class BillingTest extends InitDriver {
 
     Login login;
     Home home;
-    DownloadCSV downloadCSV;
-    String pass="";
-    String email="";
-    String OTP="";
+    Billing billing;
+    String pass="morales12345";
+    String email="josuemorales123@gmail.com";
+    String OTP="667883";
+    String cardNumber="4916155306410884";
+    String cardName="Name Test";
+    String CVV="230";
 
     @Test(priority = 1)
     public void Login() {
@@ -38,35 +42,28 @@ public class DownloadBoundaryCSVTest extends InitDriver {
     public void downloadCSVScreen() {
         home.clickDropdownButton();
         home.clickPhotoButton();
-        home.clickCreateCampaignButton();
-        downloadCSV= new DownloadCSV(driver,wait);
-        Assert.assertTrue(downloadCSV.titleExist());
+        home.clickBillingButton();
+        billing= new Billing(driver,wait);
+        Assert.assertTrue(billing.mainTitleExist());
    }
 
     @Test(priority = 2, dependsOnMethods = "Login")
-    public void setDates() {
-        downloadCSV.setStartDate();
-        downloadCSV.setEndDate();
+    public void setProduct() {
+        billing.clickFirstProduct();
+        billing.clickProceedToPay();
+        Assert.assertTrue(billing.titleExist("Detalles de Tarjeta"));
     }
 
-    @Test(priority = 3, dependsOnMethods = "Login")
-    public void setCompanies() {
-        Assert.assertTrue(downloadCSV.clickCompanyDropdownByCoordinates());
-    }
-
-    @Test(priority = 4, dependsOnMethods = "setCompanies")
-    public void downloadButtonsExists() {
-        downloadCSV.clickSendButton();
-        SoftAssert soft = new SoftAssert();
-        soft.assertTrue(downloadCSV.downloadCSVButtonExist());
-        soft.assertTrue(downloadCSV.downloadCSVImagesButtonExist());
-    }
-
-    @Test(priority = 5, dependsOnMethods = "downloadButtonsExists")
-    public void setNameAndDownload() {
-        downloadCSV.enterFileNameInput("File TestName");
-        downloadCSV.clickDownloadCSVImagesButton();
-        downloadCSV.clickDownloadCSVButton();
+    @Test(priority = 3, dependsOnMethods = "setProduct")
+    public void setData() {
+        billing.enterCardNumber(cardNumber);
+        billing.enterCardName(cardName);
+        billing.enterExpireMonth(3);
+        billing.enterExpireYear(5);
+        billing.enterCCVCode(CVV);
+        billing.clickAcceptCheck();
+        Assert.assertTrue(billing.confirmButtonExist());
+        billing.clickConfirmPayment();
     }
 
     @AfterClass()
@@ -75,4 +72,3 @@ public class DownloadBoundaryCSVTest extends InitDriver {
         driver.close();
     }
 }
-

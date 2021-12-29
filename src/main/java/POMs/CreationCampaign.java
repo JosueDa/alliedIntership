@@ -1,6 +1,7 @@
 package POMs;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -224,12 +225,11 @@ public class CreationCampaign {
         return false;
     }
 
-    public void clickCampaignObjectiveDropdown(String optionString) {
+    public void clickCampaignObjectiveDropdown() {
+        Actions builder = new Actions(driver);
         wait.until(ExpectedConditions.visibilityOf(campaignObjectiveDropdown));
         this.campaignObjectiveDropdown.click();
-        WebElement option = driver.findElement(By.xpath("//*[contains(text(),'"+optionString+"')]"));
-        wait.until(ExpectedConditions.elementToBeClickable(option));
-        option.click();
+        builder.sendKeys(Keys.TAB).build().perform();
     }
 
     public void clickNewsSectionFacebookOption() {
@@ -251,21 +251,22 @@ public class CreationCampaign {
     }
 
 
-    public void clickSelectProductDropdown(String optionString) {
+    public void clickSelectProductDropdown() {
+        Actions builder = new Actions(driver);
         wait.until(ExpectedConditions.visibilityOf(selectProductDropdown));
         this.selectProductDropdown.click();
-        WebElement option = driver.findElement(By.xpath("//*[contains(text(),'"+optionString+"')]"));
-        option.click();
+        builder.sendKeys(Keys.TAB).build().perform();
     }
 
-    public void clickAdAccount (String optionString) {
+    public void clickAdAccount () {
+        Actions builder = new Actions(driver);
         wait.until(ExpectedConditions.visibilityOf(addAccountDropdown));
         this.addAccountDropdown.click();
-        WebElement option = driver.findElement(By.xpath("//*[contains(text(),'"+optionString+"')]"));
-        option.click();
+        builder.sendKeys(Keys.TAB).build().perform();
     }
 
-    public void clickFanPageDropdown(String optionString) {
+    public void clickFanPageDropdown() {
+        Actions builder = new Actions(driver);
         wait.until(ExpectedConditions.visibilityOf(fanPageDropdown));
         wait.until(ExpectedConditions.elementToBeClickable(fanPageDropdown));
         try {
@@ -274,8 +275,7 @@ public class CreationCampaign {
             e.printStackTrace();
         }
         this.fanPageDropdown.click();
-        WebElement option = driver.findElement(By.xpath("//*[contains(text(),'"+optionString+"')]"));
-        option.click();
+        builder.sendKeys(Keys.TAB).build().perform();
     }
 
     public boolean enterOptionalNameInput(String name){

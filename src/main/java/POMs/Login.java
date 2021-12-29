@@ -71,7 +71,9 @@ public class Login {
 
     public void clickCheckpointSubmitButton() {
         wait.until(ExpectedConditions.visibilityOf(checkpointSubmitButton));
-        this.checkpointSubmitButton.click();
+        try{
+            this.checkpointSubmitButton.click();
+        }catch (Exception e){}
     }
 
 }
