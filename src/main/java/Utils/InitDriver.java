@@ -59,7 +59,7 @@ public class InitDriver {
                     options.addArguments(new String[]{"--start-maximized"});
                     options.merge(caps);
                     driver = new ChromeDriver(options);
-
+                    driver.manage().window().maximize();
                 } else if (runOn.equals("ie")) {
                     System.setProperty("webdriver.ie.driver", "drivers/windows/IEDriverServer.exe");
                     driver = new InternetExplorerDriver();

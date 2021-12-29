@@ -15,9 +15,9 @@ public class BillingTest extends InitDriver {
     Login login;
     Home home;
     Billing billing;
-    String pass="morales12345";
-    String email="josuemorales123@gmail.com";
-    String OTP="667883";
+    String pass="";
+    String email="";
+    String OTP="";
     String cardNumber="4916155306410884";
     String cardName="Name Test";
     String CVV="230";
