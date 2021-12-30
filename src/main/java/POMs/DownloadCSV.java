@@ -86,8 +86,9 @@ public class DownloadCSV {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         wait.until(ExpectedConditions.visibilityOf(startDate));
         startDate.click();
-        ((JavascriptExecutor)driver).executeScript("arguments[0].click()",prevDateButton);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].click()",prevDateButton);
+        for (int i=0; i<=15;i++){
+            ((JavascriptExecutor)driver).executeScript("arguments[0].click()",prevDateButton);
+        }
         WebElement dayElement=driver.findElement(By.xpath("(//*[text()='20'])[1]"));
         wait.until(ExpectedConditions.visibilityOf(dayElement));
         ((JavascriptExecutor)driver).executeScript("arguments[0].click()",dayElement);
