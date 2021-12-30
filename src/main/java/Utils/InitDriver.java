@@ -71,7 +71,7 @@ public class InitDriver {
             }
 
             wait = new WebDriverWait(driver, 15,100);
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         } catch (Exception var5) {
             var5.printStackTrace();
             Assert.fail("fail to init the browser");

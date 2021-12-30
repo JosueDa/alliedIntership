@@ -156,6 +156,7 @@ public class DownloadCSV {
     }
 
     public boolean downloadCSVImagesButtonExist() {
+        driver.manage().timeouts().implicitlyWait(45, TimeUnit.SECONDS);
         wait.until(ExpectedConditions.visibilityOf(downloadCSVImagesButton));
         return downloadCSVImagesButton.isDisplayed();
     }

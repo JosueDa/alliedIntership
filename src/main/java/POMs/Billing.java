@@ -147,7 +147,7 @@ public class Billing {
     public void clickConfirmPayment(){
         ((JavascriptExecutor)driver).executeScript("arguments[0].click()",confirmButton);
         try {
-            Thread.sleep(13000);
+            Thread.sleep(15000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

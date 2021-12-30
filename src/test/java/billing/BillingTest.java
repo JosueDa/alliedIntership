@@ -70,6 +70,11 @@ public class BillingTest extends InitDriver {
     @Test(priority = 4, dependsOnMethods = "setData")
     public void paymentValidation() {
         driver.get("http://web-app-lb-534600123.us-east-2.elb.amazonaws.com/app/subscriptions");
+        try {
+            Thread.sleep(6000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Assert.assertTrue(billing.subscriptionCancellationValidation());
         billing.clickCancellationSubscription();
     }
