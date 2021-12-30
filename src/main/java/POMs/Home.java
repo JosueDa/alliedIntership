@@ -12,6 +12,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Home {
 
+    @FindBy(xpath = "//*[contains(text(),'2020-11-28')]")
+    protected WebElement dropdownOptionButton;
+
     @FindBy(className = "css-1wy0on6")
     protected WebElement dropdownButton;
 
@@ -39,11 +42,11 @@ public class Home {
         PageFactory.initElements(driver,this);
     }
 
-    public void clickDropdownButton() {
-        Actions builder = new Actions(driver);
+    public void clickDropdownButtonAndSelectBusinessManager() {
         wait.until(ExpectedConditions.visibilityOf(dropdownButton));
         this.dropdownButton.click();
-        builder.sendKeys(Keys.TAB).build().perform();
+        wait.until(ExpectedConditions.visibilityOf(dropdownOptionButton));
+        this.dropdownOptionButton.click();
     }
 
     public void clickHamburgerButton() {

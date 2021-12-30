@@ -15,6 +15,12 @@ public class Billing {
     @FindBy(xpath = "//*[contains(text(),'Billing')]")
     protected WebElement titleText;
 
+    @FindBy(xpath = "//*[text()='Activo']")
+    protected WebElement activeSubscriptionLabel;
+
+    @FindBy(xpath = "//*[contains(text(),'Cancelar Suscripción')]")
+    protected WebElement cancelSubscriptionButton;
+
     @FindBy(xpath = "(//*[text()='Seleccionar'])[1]")
     protected WebElement selectFirstProductButton;
 
@@ -41,6 +47,9 @@ public class Billing {
 
     @FindBy(id = "card-ui-component-btn-confirm")
     protected WebElement confirmButton;
+
+    @FindBy(xpath = "//*[contains(text(),'Aceptar')]")
+    protected WebElement acceptCancelSubscription;
 
     private WebDriver driver;
     private WebDriverWait wait;
@@ -138,7 +147,22 @@ public class Billing {
     public void clickConfirmPayment(){
         ((JavascriptExecutor)driver).executeScript("arguments[0].click()",confirmButton);
         try {
-            Thread.sleep(10000);
+            Thread.sleep(13000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean subscriptionCancellationValidation(){
+        if (!cancelSubscriptionButton.isDisplayed()) ((JavascriptExecutor)driver).executeScript("window.scrollBy(0,250)");
+        return activeSubscriptionLabel.isDisplayed() && cancelSubscriptionButton.isDisplayed();
+    }
+
+    public void clickCancellationSubscription(){
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click()",cancelSubscriptionButton);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click()",acceptCancelSubscription);
+        try {
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

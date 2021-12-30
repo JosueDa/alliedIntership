@@ -36,7 +36,7 @@ public class DownloadCSVTest extends InitDriver {
 
     @Test(priority = 1, dependsOnMethods = "Login")
     public void downloadCSVScreen() {
-        home.clickDropdownButton();
+        home.clickDropdownButtonAndSelectBusinessManager();
         home.clickPhotoButton();
         home.clickCreateCampaignButton();
         downloadCSV= new DownloadCSV(driver,wait);

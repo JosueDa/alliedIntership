@@ -70,10 +70,11 @@ public class Login {
     }
 
     public void clickCheckpointSubmitButton() {
-        wait.until(ExpectedConditions.visibilityOf(checkpointSubmitButton));
         try{
             this.checkpointSubmitButton.click();
-        }catch (Exception e){}
+        }catch (Exception e){
+            System.out.println("the second checkpoint was not necessary");
+        }
     }
 
 }

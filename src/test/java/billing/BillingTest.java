@@ -18,6 +18,7 @@ public class BillingTest extends InitDriver {
     String pass="";
     String email="";
     String OTP="";
+
     String cardNumber="4916155306410884";
     String cardName="Name Test";
     String CVV="230";
@@ -40,7 +41,7 @@ public class BillingTest extends InitDriver {
 
     @Test(priority = 1, dependsOnMethods = "Login")
     public void downloadCSVScreen() {
-        home.clickDropdownButton();
+        home.clickDropdownButtonAndSelectBusinessManager();
         home.clickPhotoButton();
         home.clickBillingButton();
         billing= new Billing(driver,wait);
@@ -64,6 +65,13 @@ public class BillingTest extends InitDriver {
         billing.clickAcceptCheck();
         Assert.assertTrue(billing.confirmButtonExist());
         billing.clickConfirmPayment();
+    }
+
+    @Test(priority = 4, dependsOnMethods = "setData")
+    public void paymentValidation() {
+        driver.get("http://web-app-lb-534600123.us-east-2.elb.amazonaws.com/app/subscriptions");
+        billing.subscriptionCancellationValidation();
+        billing.clickCancellationSubscription();
     }
 
     @AfterClass()

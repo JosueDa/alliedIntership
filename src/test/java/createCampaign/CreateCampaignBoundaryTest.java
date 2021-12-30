@@ -41,7 +41,7 @@ public class CreateCampaignBoundaryTest extends InitDriver {
 
     @Test(priority = 2, dependsOnMethods = "Login")
     public void createCampaignScreen() {
-        home.clickDropdownButton();
+        home.clickDropdownButtonAndSelectBusinessManager();
         home.clickHamburgerButton();
         home.clickCreateCampaignButton();
         creationCampaign=new CreationCampaign(driver,wait);
